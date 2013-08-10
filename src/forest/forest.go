@@ -1,0 +1,5 @@
+package forest
+
+import (
+    "tree"
+)
