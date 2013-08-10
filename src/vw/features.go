@@ -14,6 +14,18 @@ type Data struct {
 	Features map[string]map[string]float64
 }
 
+func (d *Data) CollapseFeatures() map[string]float64 {
+	features := map[string]float64{}
+
+	for key, subFeatures := range d.Features {
+		for subKey, value := range subFeatures {
+			features[key+":"+subKey] += value
+		}
+	}
+
+	return features
+}
+
 func (d *Data) readHeader(src []byte) (err error) {
 	// label / important / tag are the first split
 	parts := bytes.Split(src, []byte(" "))
